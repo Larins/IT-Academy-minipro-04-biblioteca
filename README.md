@@ -1,3 +1,3 @@
-# IT-Academy-minipro-04-biblioteca
-### Miniproyecto 04 Biblioteca (IT Academy)
+# IT-Academy-minipro-02-recetario
+### Miniproyecto 02 Recetario (IT Academy)
 ### Alumna: Lara Saiz

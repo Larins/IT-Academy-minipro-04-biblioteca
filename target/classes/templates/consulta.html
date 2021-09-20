@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>LISTADO DE LIBROS</title>
+</head>
+<body 
+	 style="background-color:LightYellow;
+	 font-family:monospace;
+	 color:DarkOliveGreen;
+	 text-align:center;">
+	<h5>
+		Login: 
+			<span 
+				th:text="${usuario.nombre}">
+			</span> 
+		- Password: 
+			<span
+				th:text="${usuario.password}">
+			</span>
+	</h5>
+
+	<h1>LISTADO DE LIBROS</h1>
+	<table style="width:100%"; border=1>
+		<thead>
+			<tr>
+				<th>Id
+				<th>Titulo
+				<th>Autor
+				<th>Publicacion
+				<th>ISBN
+				<th>Genero
+				<th>Paginas
+				<th>Descripcion
+				<th>Borrar
+				<th>Modificar
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${libros.empty}">
+				<td colspan="2">No hay libros disponibles</td>
+			</tr>
+			<tr th:each="libro : ${libros}">
+				<td><span th:text="${libro.id}"></span></td>
+				<td><span th:text="${libro.titulo}"></span></td>
+				<td><span th:text="${libro.autor}"></span></td>
+				<td><span th:text="${libro.publicacion}"></span></td>
+				<td><span th:text="${libro.isbn}"></span></td>
+				<td><span th:text="${libro.genero.tema}"></span></td>
+				<td><span th:text="${libro.paginas}"></span></td>
+				<td><span th:text="${libro.descripcion}"></span></td>
+				<td><a th:href="@{/borrado/}+${libro.id}">Borrar</a></td>
+				<td><a th:href="@{/modificar/}+${libro.id}">Modificar</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<form style="text-align: left; display:flex; flex-direction: column; align-items: center"
+		th:action="${action}" 
+		th:object="${libro}" 
+		method="post">
+	<br>
+		ID (autom&aacutetico):
+		<br>          
+			<input 
+				type=text 
+				th:field="*{id}"     
+				value="*{id}" read>
+			<br>
+		LIBRO: 
+			<input 
+				type=text 
+				th:field="*{titulo}" 
+				value="*{titulo}">
+			<br>		
+		AUTOR: 
+			<input 
+				type=text 
+				th:field="*{autor}" 
+				value="*{autor}">
+			<br>
+		PUBLICACION: 
+			<input 
+				type=text 
+				th:field="*{publicacion}" 
+				value="*{publicacion}">
+			<br>
+		ISBN: 
+			<input 
+				type=text 
+				th:field="*{isbn}" 
+				value="*{isbn}">
+			<br>	
+		GENERO:
+			<select th:field="*{genero}">
+				<option
+					th:each="genero : ${T(com.example.demo.bean.Genero).values()}"
+					th:value="${genero}" 
+					th:text="${genero.tema}">
+				</option>						
+			</select> 
+			<br>
+		PAGINAS: 
+			<input 
+				type=text 
+				th:field="*{paginas}" 
+				value="*{paginas}">
+			<br>	
+		DESCRIPCION: 
+			<input 
+				type=text 
+				th:field="*{descripcion}" 
+				value="*{descripcion}">
+			<br>	
+		<br><input type=submit name=submit th:value="${boton}">
+		<br>
+	</form>
+	<footer style="color:Teal;text-align:center;">
+		<ul>
+			<hr style="border:30px;"><hr style="color:Teal;">
+			<br>Lara Saiz Moya - IT Academy - Septiembre 2021
+		</ul>
+	</footer>
+</body>
+</html>
