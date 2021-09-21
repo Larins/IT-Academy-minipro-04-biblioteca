@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.bean.Libro;
-import com.example.demo.bean.Genero;
+import com.example.demo.bean.Planeta;
 import com.example.demo.bean.Usuario;
 import com.example.demo.repository.BaseDatosService;
 
@@ -36,12 +35,12 @@ public class Controlador {
 	@PostMapping("/")
 	public String login(Usuario usuario, Model model) {
 		if (bd.compruebaUsuario(usuario.getNombre(), usuario.getPassword())) {
-			ArrayList<Libro> libros = bd.getLibros();
+			ArrayList<Planeta> planetas = bd.getPlanetas();
 			model.addAttribute("usuario", usuario);
 			this.usuario = usuario;
-			model.addAttribute("libros", libros);
-			model.addAttribute("libro", new Libro(0,"","","","",Genero.OTROS,0,""));
-			model.addAttribute("boton", "Insertar libro");
+			model.addAttribute("planetas", planetas);
+			model.addAttribute("planeta", new Planeta(0,"",0,0,0,0,0,0));
+			model.addAttribute("boton", "Insertar planeta");
 			model.addAttribute("action", "/insertar");
 			return "consulta";
 		} else
@@ -51,15 +50,14 @@ public class Controlador {
 
 	// HANDLER INSERCION
 	@PostMapping("/insertar")
-	public String insertar(Libro libro, Model model) {
-		libro.setNum(libro.getGenero().getNum());
-		bd.inserta(libro);
-		ArrayList<Libro> libros = bd.getLibros();
+	public String insertar(Planeta planeta, Model model) {
+		bd.inserta(planeta);
+		ArrayList<Planeta> planetas = bd.getPlanetas();
 		model.addAttribute("usuario", this.usuario);
 		this.usuario = usuario;
-		model.addAttribute("libros", libros);
-		model.addAttribute("libro", new Libro(0,"","","","",Genero.OTROS,0,""));
-		model.addAttribute("boton", "Insertar libro");
+		model.addAttribute("planetas", planetas);
+		model.addAttribute("planeta", new Planeta(0,"",0,0,0,0,0,0));
+		model.addAttribute("boton", "Insertar planeta");
 		model.addAttribute("action", "/insertar");
 		return "consulta";
 	}
@@ -68,12 +66,12 @@ public class Controlador {
 	@GetMapping("/borrado/{id}")
 	public String borrar(@PathVariable int id, Model model) {
 		bd.borrar(id);
-		ArrayList<Libro> libros = bd.getLibros();
+		ArrayList<Planeta> planetas = bd.getPlanetas();
 		model.addAttribute("usuario", this.usuario);
 		this.usuario = usuario;
-		model.addAttribute("libros", libros);
-		model.addAttribute("libro", new Libro(0,"","","","",Genero.OTROS,0,""));
-		model.addAttribute("boton", "Insertar libro");
+		model.addAttribute("planetas", planetas);
+		model.addAttribute("planeta", new Planeta(0,"",0,0,0,0,0,0));
+		model.addAttribute("boton", "Insertar planeta");
 		model.addAttribute("action", "/insertar");
 		return "consulta";
 	}
@@ -81,28 +79,27 @@ public class Controlador {
 	// Handler modificar GET (rellenar formulario)
 	@GetMapping("/modificar/{id}")
 	public String modificar(@PathVariable int id, Model model) {
-		Libro libro = bd.getLibro(id);
-		ArrayList<Libro> libros = bd.getLibros();
+		Planeta planeta = bd.getPlaneta(id);
+		ArrayList<Planeta> planetas = bd.getPlanetas();
 		model.addAttribute("usuario", this.usuario);
 		this.usuario = usuario;
-		model.addAttribute("libros", libros);
-		model.addAttribute("libro", libro);
-		model.addAttribute("boton", "Actualizar libro");
+		model.addAttribute("planetas", planetas);
+		model.addAttribute("planeta", planeta);
+		model.addAttribute("boton", "Actualizar planeta");
 		model.addAttribute("action", "/modificar");
 		return "consulta";
 	}
 
 	// Handler modificar POST (enviar formulario)
 	@PostMapping("/modificar")
-	public String modificar2(Libro libro, Model model) {
-		libro.setNum(libro.getGenero().getNum());
-		bd.modifica(libro);
-		ArrayList<Libro> libros = bd.getLibros();
+	public String modificar2(Planeta planeta, Model model) {
+		bd.modifica(planeta);
+		ArrayList<Planeta> planetas = bd.getPlanetas();
 		model.addAttribute("usuario", this.usuario);
 		// this.usuario = usuario;
-		model.addAttribute("libros", libros);
-		model.addAttribute("libro", new Libro(0,"","","","",Genero.OTROS,0,""));
-		model.addAttribute("boton", "Actualizar libro");
+		model.addAttribute("planetas", planetas);
+		model.addAttribute("planeta", new Planeta(0,"",0,0,0,0,0,0));
+		model.addAttribute("boton", "Actualizar planeta");
 		model.addAttribute("action", "/insertar");
 		return "consulta";
 	}

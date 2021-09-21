@@ -1,15 +1,15 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
-import com.example.demo.bean.Libro;
+import com.example.demo.bean.Planeta;
 
 //En comentarios: la función equivalente en JPA
 public interface IBaseDatos {
-	public void inserta(Libro libro);		//SAVE
+	public void inserta(Planeta planeta);		//SAVE
 	public void borrar(int id);				//DELETE BY ID
-	public void modifica(Libro libro);		//SAVE
-	public Libro getLibro(int id);			//FIND BY ID
-	public ArrayList<Libro> getLibros();	//FIND ALL
+	public void modifica(Planeta planeta);		//SAVE
+	public Planeta getPlaneta(int id);			//FIND BY ID
+	public ArrayList<Planeta> getPlanetas();	//FIND ALL
 	public boolean compruebaUsuario(String usuario, String password);
 
 }

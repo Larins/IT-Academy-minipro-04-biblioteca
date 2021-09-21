@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.bean.Libro;
+import com.example.demo.bean.Planeta;
 import com.example.demo.service.IBaseDatos;
 import com.mysql.cj.xdevapi.Statement;
 
@@ -19,8 +19,8 @@ public class BaseDatosService implements IBaseDatos {
 	BaseDatos bd;
 
 	@Override
-	public void inserta(Libro libro) {
-		bd.save(libro); //Función JPA
+	public void inserta(Planeta planeta) {
+		bd.save(planeta); //Función JPA
 	}
 
 	@Override
@@ -29,20 +29,20 @@ public class BaseDatosService implements IBaseDatos {
 	};
 
 	@Override
-	public void modifica(Libro libro) {
-		bd.save(libro); //Función JPA
+	public void modifica(Planeta planeta) {
+		bd.save(planeta); //Función JPA
 	}
 
 	@Override
-	public Libro getLibro(int id) {
-		Optional<Libro> l = bd.findById(id); //Función JPA
+	public Planeta getPlaneta(int id) {
+		Optional<Planeta> l = bd.findById(id); //Función JPA
 		return l.get(); //Función JPA
 		//return null; //Se cambia por la función JPA
 	}
 
 	@Override
-	public ArrayList<Libro> getLibros() {
-		return (ArrayList<Libro>) bd.findAll(); //Función JPA
+	public ArrayList<Planeta> getPlanetas() {
+		return (ArrayList<Planeta>) bd.findAll(); //Función JPA
 		//return null; //Se cambia por la función JPA
 	}
 
